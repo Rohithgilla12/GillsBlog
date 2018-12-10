@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GillsBlog</string>
+    <string name="email">Email</string>
+    <string name="welcome_to_gills_blog">Welcome to Gills blog</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+</resources>

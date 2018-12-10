@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "854747697561",
+    "firebase_url": "https://gillsblog-b8994.firebaseio.com",
+    "project_id": "gillsblog-b8994",
+    "storage_bucket": "gillsblog-b8994.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854747697561:android:acec4db0f9124b66",
+        "android_client_info": {
+          "package_name": "com.dude.rohithgilla.gillsblog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854747697561-vhkog7qcqh7bq0aafrmi587g5i6t046m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dude.rohithgilla.gillsblog",
+            "certificate_hash": "9b756698c04e0ddf4fdb3de5df8f4fbd76424faf"
+          }
+        },
+        {
+          "client_id": "854747697561-49ftpsuagbl0b0h5lshtkchm457s4jsi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_6zV_9JPAzBfqeukCeo-KM85ZE6RtMJc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854747697561-49ftpsuagbl0b0h5lshtkchm457s4jsi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
