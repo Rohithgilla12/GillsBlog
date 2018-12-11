@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.actionLogout:
                 logOut();
                 return true;
+            case R.id.actionSettings:
+                Intent accountSetting = new Intent(MainActivity.this,SetupActivity.class);
+                startActivity(accountSetting);
+                return true;
             default:
                 return false;
         }
