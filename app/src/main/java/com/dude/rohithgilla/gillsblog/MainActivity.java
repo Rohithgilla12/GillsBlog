@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
         accountFragment = new AccountFragment();
+
         bottomNavigationView=findViewById(R.id.mainBottomNav);
 
 
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newPostIntent);
             }
         });
-
+        replaceFragement(homeFragment);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

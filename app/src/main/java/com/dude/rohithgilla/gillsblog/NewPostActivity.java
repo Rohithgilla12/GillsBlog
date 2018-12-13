@@ -120,11 +120,11 @@ public class NewPostActivity extends AppCompatActivity {
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         String downloadThumbUrl = taskSnapshot.getDownloadUrl().toString();
                                         Map <String,Object> postMap = new HashMap<>();
-                                        postMap.put("ImageUrl",downloadUri);
-                                        postMap.put("ThumbnaiUrl",downloadThumbUrl);
-                                        postMap.put("Desc",desc);
-                                        postMap.put("UserID",currentUserId);
-                                        postMap.put("Timestamp",FieldValue.serverTimestamp());
+                                        postMap.put("image_url",downloadUri);
+                                        postMap.put("image_thumb",downloadThumbUrl);
+                                        postMap.put("desc",desc);
+                                        postMap.put("user_id",currentUserId);
+                                        postMap.put("timestamp",FieldValue.serverTimestamp());
                                         firebaseStorage.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentReference> task) {
