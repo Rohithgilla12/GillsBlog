@@ -92,11 +92,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        userId = mAuth.getCurrentUser().getUid();
+
         if (currentUser == null){
             sendToLogin();
         }
         else {
+            userId = mAuth.getCurrentUser().getUid();
             firebaseFirestore.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

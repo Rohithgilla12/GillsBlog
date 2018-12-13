@@ -8,8 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -36,6 +41,11 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
         String image_url =blogpostList.get(position).getImage_url();
         holder.setBlogImage(image_url);
+
+        String user_id = blogpostList.get(position).getUser_id();
+        holder.setUserID(user_id);
+
+
     }
 
     @Override
@@ -47,6 +57,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         private View mView;
         private TextView descView;
         private ImageView blogImageView;
+        private TextView userName;
+        private ImageView profilePicture;
+        FirebaseFirestore firebaseFirestore;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -59,6 +72,25 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         public void setBlogImage(String downloadUri){
             blogImageView = mView.findViewById(R.id.blogImage);
             Glide.with(context).load(downloadUri).into(blogImageView);
+        }
+
+        public void setUserID(final String userCode){
+           firebaseFirestore = FirebaseFirestore.getInstance();
+           firebaseFirestore.collection("Users").document(userCode).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+               @Override
+               public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                   if(task.isSuccessful()){
+                       String userNameText = task.getResult().getString("Name");
+//                       Toast.makeText(context,userNameText,Toast.LENGTH_LONG).show();
+                       userName = mView.findViewById(R.id.blogUserName);
+                       userName.setText(userNameText);
+                       String profileImage = task.getResult().getString("Image");
+                       profilePicture = mView.findViewById(R.id.blogUserImage);
+                       Glide.with(context).load(profileImage).into(profilePicture);
+                   }
+
+               }
+           });
         }
     }
 }
