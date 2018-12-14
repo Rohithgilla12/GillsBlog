@@ -3,6 +3,7 @@ package com.dude.rohithgilla.gillsblog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.List;
 
 public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> {
@@ -45,6 +48,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         String user_id = blogpostList.get(position).getUser_id();
         holder.setUserID(user_id);
 
+        long milliSecs = blogpostList.get(position).getTimestamp().getTime();
+        String dateString = DateFormat.format("MM/dd/yyyy", new Date(milliSecs)).toString();
+        holder.setTime(dateString);
 
     }
 
@@ -59,6 +65,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         private ImageView blogImageView;
         private TextView userName;
         private ImageView profilePicture;
+        private TextView timePost;
         FirebaseFirestore firebaseFirestore;
 
         public ViewHolder(View itemView) {
@@ -71,7 +78,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         }
         public void setBlogImage(String downloadUri){
             blogImageView = mView.findViewById(R.id.blogImage);
-            Glide.with(context).load(downloadUri).into(blogImageView);
+            RequestOptions postPlaceholder = new RequestOptions();
+            postPlaceholder.placeholder(R.drawable.image_placeholder);
+            Glide.with(context).applyDefaultRequestOptions(postPlaceholder).load(downloadUri).into(blogImageView);
         }
 
         public void setUserID(final String userCode){
@@ -86,11 +95,19 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
                        userName.setText(userNameText);
                        String profileImage = task.getResult().getString("Image");
                        profilePicture = mView.findViewById(R.id.blogUserImage);
-                       Glide.with(context).load(profileImage).into(profilePicture);
+
+                       RequestOptions profilePlaceholder = new RequestOptions();
+                       profilePlaceholder.placeholder(R.drawable.profile_placeholder);
+                       Glide.with(context).applyDefaultRequestOptions(profilePlaceholder).load(profileImage).into(profilePicture);
                    }
 
                }
            });
+        }
+
+        public void setTime(String time){
+            timePost = mView.findViewById(R.id.blogPostDate);
+            timePost.setText(time);
         }
     }
 }
